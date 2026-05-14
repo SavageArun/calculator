@@ -1,0 +1,128 @@
+<div style="display:flex;justify-content:center;align-items:flex-start;padding:2rem 0;background:transparent">
+  <div style="width:360px;background:#1c1c1e;border-radius:36px;overflow:hidden;box-shadow:0 0 0 8px #2a2a2e,0 24px 60px rgba(0,0,0,0.5);font-family:var(--font-sans)">
+
+    <div style="background:#111;padding:16px 0 6px;display:flex;justify-content:center;align-items:center">
+      <div style="width:110px;height:28px;background:#1c1c1e;border-radius:20px;display:flex;align-items:center;justify-content:center;gap:8px">
+        <div style="width:10px;height:10px;border-radius:50%;background:#2a2a2e"></div>
+        <div style="width:60px;height:10px;border-radius:8px;background:#2a2a2e"></div>
+      </div>
+    </div>
+
+    <div id="display" style="background:#1c1c1e;padding:12px 28px 20px;text-align:right">
+      <div id="expr" style="font-size:16px;color:#888;min-height:22px;word-break:break-all;line-height:1.4">&nbsp;</div>
+      <div id="result" style="font-size:56px;color:#fff;font-weight:300;letter-spacing:-1px;margin-top:4px;word-break:break-all;line-height:1.1">0</div>
+    </div>
+
+    <div style="background:#1c1c1e;padding:0 16px 16px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+
+      <button class="btn special" onclick="clearAll()">AC</button>
+      <button class="btn special" onclick="toggleSign()">+/−</button>
+      <button class="btn special" onclick="percent()">%</button>
+      <button class="btn op" onclick="op('÷')">÷</button>
+
+      <button class="btn num" onclick="num('7')">7</button>
+      <button class="btn num" onclick="num('8')">8</button>
+      <button class="btn num" onclick="num('9')">9</button>
+      <button class="btn op" onclick="op('×')">×</button>
+
+      <button class="btn num" onclick="num('4')">4</button>
+      <button class="btn num" onclick="num('5')">5</button>
+      <button class="btn num" onclick="num('6')">6</button>
+      <button class="btn op" onclick="op('−')">−</button>
+
+      <button class="btn num" onclick="num('1')">1</button>
+      <button class="btn num" onclick="num('2')">2</button>
+      <button class="btn num" onclick="num('3')">3</button>
+      <button class="btn op" onclick="op('+')">+</button>
+
+      <button class="btn num" onclick="num('0')" style="grid-column:span 2;text-align:left;padding-left:28px">0</button>
+      <button class="btn num" onclick="dot()">.</button>
+      <button class="btn eq" onclick="equals()">=</button>
+
+    </div>
+
+    <div style="background:#111;padding:8px 0 20px;display:flex;justify-content:center">
+      <div style="width:120px;height:4px;background:#444;border-radius:4px"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+.btn{border:none;border-radius:50%;width:72px;height:72px;font-size:26px;font-weight:400;cursor:pointer;transition:transform 0.08s,opacity 0.08s;display:flex;align-items:center;justify-content:center;margin:0 auto}
+.btn:active{transform:scale(0.92);opacity:0.8}
+.num{background:#333;color:#fff}
+.special{background:#a5a5a5;color:#000}
+.op{background:#ff9f0a;color:#fff}
+.eq{background:#ff9f0a;color:#fff}
+</style>
+
+<script>
+let cur='0', prev='', oper='', fresh=true, hasResult=false;
+const rEl=document.getElementById('result');
+const eEl=document.getElementById('expr');
+
+function upd(){
+  let d=cur;
+  if(d.length>10) d=parseFloat(d).toPrecision(8);
+  rEl.textContent=d;
+  document.querySelector('.btn.special').textContent=(cur==='0'&&!prev)?'AC':'C';
+}
+
+function num(n){
+  if(fresh||cur==='0'){cur=(n==='0'&&cur==='0')?'0':n;fresh=false;}
+  else{if(cur.replace('-','').replace('.','').length<12)cur+=n;}
+  hasResult=false;upd();
+}
+
+function dot(){
+  if(fresh){cur='0.';fresh=false;}
+  else if(!cur.includes('.'))cur+='.';
+  upd();
+}
+
+function clearAll(){
+  if(!fresh&&cur!=='0'&&cur!==''&&document.querySelector('.btn.special').textContent==='C'){
+    cur='0';fresh=true;upd();return;
+  }
+  cur='0';prev='';oper='';fresh=true;hasResult=false;eEl.innerHTML='&nbsp;';upd();
+}
+
+function toggleSign(){
+  if(cur==='0')return;
+  cur=(cur[0]==='-')?cur.slice(1):'-'+cur;upd();
+}
+
+function percent(){
+  let v=parseFloat(cur);
+  if(oper&&prev){v=parseFloat(prev)*v/100;}
+  else{v=v/100;}
+  cur=strip(v);fresh=true;upd();
+}
+
+function strip(v){
+  let s=parseFloat(v.toPrecision(12)).toString();
+  return s;
+}
+
+function op(o){
+  if(oper&&!fresh){calc(false);}
+  prev=cur;oper=o;fresh=true;hasResult=false;
+  eEl.textContent=prev+' '+o;
+}
+
+function calc(final){
+  if(!prev||!oper)return;
+  let a=parseFloat(prev),b=parseFloat(cur),r;
+  if(oper==='÷'){r=b===0?'Error':a/b;}
+  else if(oper==='×')r=a*b;
+  else if(oper==='−')r=a-b;
+  else if(oper==='+')r=a+b;
+  if(r==='Error'){cur='Error';}
+  else{cur=strip(r);}
+  if(final){eEl.textContent=prev+' '+oper+' '+b+' =';prev='';oper='';hasResult=true;}
+  fresh=true;upd();
+}
+
+function equals(){calc(true);}
+upd();
+</script>
