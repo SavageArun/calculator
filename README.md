@@ -1,9 +1,9 @@
 
-# Simple Calculator
+# Simple, "Right-Side-Up" 😉 Calculator
 
-A simple, responsive calculator built using HTML, CSS, and JavaScript. This project replicates the UI design of a basic calculator with essential operations and is optimized for both mobile and desktop views.
+A simple, responsive calculator built using HTML, CSS, and JavaScript. This project replicates the UI design of a basic calculator with essential operations and is optimized for both mobile and desktop views—but puts the numbers in [the same order as on a telephone](https://ux.stackexchange.com/questions/16666/why-do-numpads-on-keyboards-and-phones-have-reversed-layouts), for those who prefer it.
 
-![Calculator Preview](Screenshot-(44).png)
+![Calculator Preview](Screenshot.png)
 
 ## Features
 
@@ -12,9 +12,9 @@ A simple, responsive calculator built using HTML, CSS, and JavaScript. This proj
 - Clear, minimalistic UI
 - Light blue theme similar to standard calculator applications
 
-## Preview
+## No Installation Required
 
-![Calculator GIF](demo.gif) <!-- Add a demo GIF if possible -->
+Just [use it](https://codingthat.github.io/calculator/) on your phone's web browser.
 
 ## Technologies Used
 
@@ -68,4 +68,5 @@ Feel free to contribute to this project. Pull requests are welcome. For major ch
 This project is open-source and available under the [MIT License](LICENSE).
 
 
-**Author:** Arun Kumar ([GitHub Profile](https://github.com/savagearun))
+- **Original Author:** Arun Kumar ([GitHub Profile](https://github.com/savagearun))
+- **This Fork's Contributors:** Kevin Bloch ([@codingthat](https://github.com/codingthat))

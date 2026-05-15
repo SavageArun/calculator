@@ -43,7 +43,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            width: 100%;
+            height: 60px;
             font-size: 1.5em;
             border-radius: 50%;
             background-color: #e0e6f9;
@@ -64,6 +65,7 @@
             grid-column: span 2;
             background-color: #c9d7f8;
             color: #333;
+            border-radius: 25px;
         }
         .button:hover {
             background-color: #d8e1f5;
@@ -85,6 +87,9 @@
             .display {
                 font-size: 1.5em;
             }
+            .button {
+                height: 50px;
+            }
         }
     </style>
 </head>
@@ -97,9 +102,9 @@
             <div class="button" onclick="appendToDisplay(')')">)</div>
             <div class="button operation" onclick="appendToDisplay('/')">÷</div>
 
-            <div class="button" onclick="appendToDisplay('7')">7</div>
-            <div class="button" onclick="appendToDisplay('8')">8</div>
-            <div class="button" onclick="appendToDisplay('9')">9</div>
+            <div class="button" onclick="appendToDisplay('1')">1</div>
+            <div class="button" onclick="appendToDisplay('2')">2</div>
+            <div class="button" onclick="appendToDisplay('3')">3</div>
             <div class="button operation" onclick="appendToDisplay('*')">×</div>
 
             <div class="button" onclick="appendToDisplay('4')">4</div>
@@ -107,9 +112,9 @@
             <div class="button" onclick="appendToDisplay('6')">6</div>
             <div class="button operation" onclick="appendToDisplay('-')">−</div>
 
-            <div class="button" onclick="appendToDisplay('1')">1</div>
-            <div class="button" onclick="appendToDisplay('2')">2</div>
-            <div class="button" onclick="appendToDisplay('3')">3</div>
+            <div class="button" onclick="appendToDisplay('7')">7</div>
+            <div class="button" onclick="appendToDisplay('8')">8</div>
+            <div class="button" onclick="appendToDisplay('9')">9</div>
             <div class="button operation" onclick="appendToDisplay('+')">+</div>
 
             <div class="button" onclick="appendToDisplay('0')">0</div>
